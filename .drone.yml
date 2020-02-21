@@ -4,7 +4,7 @@ name: default
 
 steps:
 - name: clean
-  image: microsoft/core-nightly:sdk
+  image: microsoft/dotnet/core:sdk
   commands:
   - dotnet clean Drone-POC/Core/Core.csproj
 
