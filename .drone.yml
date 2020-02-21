@@ -13,3 +13,7 @@ steps:
   image: mcr.microsoft.com/dotnet/core/sdk:3.0
   commands:
   - dotnet build Drone-POC/Core/Core.csproj
+  
+trigger:
+  branch:
+  - develop
