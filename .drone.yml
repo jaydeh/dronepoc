@@ -3,8 +3,8 @@ type: docker
 name: default
 
 steps:
-- name: test
-  image: microsoft/dotnet:sdk
+- name: clean and build
+  image: microsoft/dotnetcore:sdk
   commands:
   - dotnet clean Drone-POC/Core/Core.csproj
   - dotnet build Drone-POC/Core/Core.csproj
