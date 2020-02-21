@@ -4,12 +4,12 @@ name: default
 
 steps:
 - name: clean
-  image: microsoft/dotnet:2.1-aspnetcore-sdk
+  image: mcr.microsoft.com/dotnet/core/sdk:2.2
   commands:
   - dotnet --version
   - dotnet clean Drone-POC/Core/Core.csproj
 
 - name: build
-  image: microsoft/dotnet:2.1-aspnetcore-runtime
+  image: mcr.microsoft.com/dotnet/core/sdk:2.2
   commands:
   - dotnet build Drone-POC/Core/Core.csproj
