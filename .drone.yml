@@ -1,0 +1,10 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+- name: test
+  image: microsoft/dotnet:sdk
+  commands:
+  - dotnet clean
+  - dotnet build
