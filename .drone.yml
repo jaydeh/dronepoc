@@ -53,7 +53,19 @@ steps:
 trigger:
   branch:
   - develop
-#---
+---
+kind: pipeline
+type: docker
+name: deploy
+
+steps:
+- name: clean
+  image: mcr.microsoft.com/dotnet/core/sdk:3.0
+  commands:
+  - dotnet clean Drone-POC/WebApplication2/WebApplication2.csproj
+
+depends_on:
+- web
 #pipeline:
 #  deploy:
 #    image: cschlosser/drone-ftps
