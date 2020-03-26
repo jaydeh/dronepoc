@@ -19,7 +19,7 @@ trigger:
 ---
 kind: pipeline
 type: docker
-name: web build
+name: web
 
 steps:
 - name: clean
