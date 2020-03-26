@@ -54,7 +54,7 @@ steps:
 trigger:
   branch:
   - develop
----
+#---
 #pipeline:
 #  deploy:
 #    image: cschlosser/drone-ftps
