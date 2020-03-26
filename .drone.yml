@@ -37,7 +37,7 @@ steps:
   commands:
   - dotnet publish --configuration Release Drone-POC/WebApplication2/WebApplication2.csproj
   - cd /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/
-  - dir
+  - cp -r /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/ webdir
   
 #- name: deploy
 #  image: cschlosser/drone-ftps
@@ -53,6 +53,10 @@ steps:
 trigger:
   branch:
   - develop
+  
+ volumes:
+- name: webdir
+  temp: {}
 ---
 kind: pipeline
 type: docker
@@ -62,10 +66,15 @@ steps:
 - name: clean
   image: mcr.microsoft.com/dotnet/core/sdk:3.0
   commands:
-  - cd /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/
+  - cd webdir
+  - ls
 
 depends_on:
 - web
+
+volumes:
+- name: webdir
+  temp: {}
 #pipeline:
 #  deploy:
 #    image: cschlosser/drone-ftps
