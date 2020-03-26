@@ -52,6 +52,5 @@ pipeline:
     secure: true
 +   src_dir: /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/
 
-depends_on:
-- web build
-
+#depends_on:
+#- web build
