@@ -34,6 +34,10 @@ steps:
   commands:
   - dotnet build Drone-POC/WebApplication2/WebApplication2.csproj
   
+- name: publish
+  image: mcr.microsoft.com/dotnet/core/sdk:3.0
+  commands:
+  - dotnet publish --configuration Release Drone-POC/WebApplication2/WebApplication2.csproj
 trigger:
   branch:
   - develop
