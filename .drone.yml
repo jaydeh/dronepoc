@@ -62,7 +62,7 @@ steps:
 - name: clean
   image: mcr.microsoft.com/dotnet/core/sdk:3.0
   commands:
-  - dotnet clean Drone-POC/WebApplication2/WebApplication2.csproj
+  - cd /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/
 
 depends_on:
 - web
