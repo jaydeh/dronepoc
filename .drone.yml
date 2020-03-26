@@ -42,7 +42,8 @@ steps:
   
 - name: deploy
   image: cschlosser/drone-ftps
-  FTP_USERNAME:
+  environment:
+    FTP_USERNAME:
       from_secret: ftp_username
     FTP_PASSWORD:
       from_secret: ftp_password
