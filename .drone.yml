@@ -26,7 +26,6 @@ steps:
 - name: clean
   image: mcr.microsoft.com/dotnet/core/sdk:3.0
   commands:
-  - dotnet --version
   - dotnet clean Drone-POC/WebApplication2/WebApplication2.csproj
 
 - name: build
@@ -41,10 +40,9 @@ steps:
   - cd /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/
   - dir
   
-  - name: deploy
+- name: deploy
   image: cschlosser/drone-ftps
-  environment:
-    FTP_USERNAME:
+  FTP_USERNAME:
       from_secret: ftp_username
     FTP_PASSWORD:
       from_secret: ftp_password
