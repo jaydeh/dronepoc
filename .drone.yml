@@ -70,4 +70,4 @@ steps:
      PLUGIN_SRC_DIR: /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/
     PLUGIN_SECURE: true
 depends_on:
-- web build
+- "web build"
