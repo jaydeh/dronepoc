@@ -57,24 +57,24 @@ trigger:
  volumes:
 - name: webdir
   temp: {}
----
-kind: pipeline
-type: docker
-name: deploy
+#---
+#kind: pipeline
+#type: docker
+#name: deploy
+#
+#steps:
+#- name: clean
+#  image: mcr.microsoft.com/dotnet/core/sdk:3.0
+#  commands:
+#  - cd webdir
+#  - ls
 
-steps:
-- name: clean
-  image: mcr.microsoft.com/dotnet/core/sdk:3.0
-  commands:
-  - cd webdir
-  - ls
+#depends_on:
+#- web
 
-depends_on:
-- web
-
-volumes:
-- name: webdir
-  temp: {}
+#volumes:
+#- name: webdir
+#  temp: {}
 #pipeline:
 #  deploy:
 #    image: cschlosser/drone-ftps
