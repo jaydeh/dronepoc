@@ -39,16 +39,17 @@ steps:
   - cd /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/
   - dir
   
-- name: deploy
-  image: cschlosser/drone-ftps
-  environment:
-    FTP_USERNAME:
-      from_secret: ftp_username
-    FTP_PASSWORD:
-      from_secret: ftp_password
-    PLUGIN_HOSTNAME: ftps://waws-prod-dm1-057.ftp.azurewebsites.windows.net/site/wwwroot:21
-     PLUGIN_SRC_DIR: /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/
-    PLUGIN_SECURE: true
+#- name: deploy
+#  image: cschlosser/drone-ftps
+#  environment:
+#    FTP_USERNAME:
+#      from_secret: ftp_username
+#    FTP_PASSWORD:
+#      from_secret: ftp_password
+#    PLUGIN_HOSTNAME: ftps://waws-prod-dm1-057.ftp.azurewebsites.windows.net/site/wwwroot:21
+#     PLUGIN_SRC_DIR: /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/
+#    PLUGIN_SECURE: true
+
 trigger:
   branch:
   - develop
