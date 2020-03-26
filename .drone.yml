@@ -54,7 +54,7 @@ trigger:
   branch:
   - develop
   
- volumes:
+volumes:
 - name: webdir
   temp: {}
 #---
