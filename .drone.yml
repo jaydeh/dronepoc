@@ -38,8 +38,8 @@ steps:
   image: mcr.microsoft.com/dotnet/core/sdk:3.0
   commands:
   - dotnet publish --configuration Release Drone-POC/WebApplication2/WebApplication2.csproj
-  -cd /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/
-  -dir
+  - cd /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/
+  - dir
 trigger:
   branch:
   - develop
