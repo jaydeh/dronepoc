@@ -35,7 +35,7 @@ steps:
 - name: publish
   image: mcr.microsoft.com/dotnet/core/sdk:3.0
   volumes:
-  - name: m2
+  - name: webdir
     path: /root/.webdir/web
   commands:
   - dotnet publish --configuration Release Drone-POC/WebApplication2/WebApplication2.csproj
