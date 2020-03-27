@@ -34,10 +34,13 @@ steps:
   
 - name: publish
   image: mcr.microsoft.com/dotnet/core/sdk:3.0
+  volumes:
+  - name: m2
+    path: /root/.m2/web
   commands:
   - dotnet publish --configuration Release Drone-POC/WebApplication2/WebApplication2.csproj
   - cd /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/
-  - cp -r /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/ webdir
+  - cp -r /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/ /root/.m2/web
   
 #- name: deploy
 #  image: cschlosser/drone-ftps
