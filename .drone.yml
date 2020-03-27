@@ -74,6 +74,7 @@ steps:
   commands:
   - cd  /root/.webdir/web
   - ls
+  - dir
 
 depends_on:
 - web
