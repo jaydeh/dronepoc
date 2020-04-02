@@ -52,6 +52,7 @@ steps:
   image: mcr.microsoft.com/azure-cli
   commands:
   - ls
+  - az webapp deployment source config-zip --src /drone/src/web/output_file.zip -n testingapp-drone -g data-factory-poc-int
    # environment:
 #      AZURE_CLIENT_ID:
  #       from_secret: AZURE_CLIENT_ID
