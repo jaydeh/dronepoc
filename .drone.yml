@@ -38,6 +38,8 @@ steps:
   - name: webdir
     path: /root/.webdir/web
   commands:
+  - apt-get update
+  - apt-get upgrade
   - apt-get install zip unzip -y
   - dotnet publish --configuration Release Drone-POC/WebApplication2/WebApplication2.csproj
   - cd /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/
