@@ -43,8 +43,10 @@ steps:
   - apt-get install zip unzip -y
   - dotnet publish --configuration Release Drone-POC/WebApplication2/WebApplication2.csproj
   - cd /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/
-  - cp /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/ /drone/src/web
-  - zip -r output_file.zip /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/
+  - cp -r /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/ /drone/src/web
+  - cd /drone/src/web
+  - dir
+  - zip output_file.zip /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/
   - dir
   - cp -r output_file.zip /drone/src
   
