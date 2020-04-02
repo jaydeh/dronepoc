@@ -46,7 +46,7 @@ steps:
   - cp -r /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/ /drone/src/web
   - cd /drone/src/web
   - dir
-  - zip -r output_file.zip 
+  - zip -r output_file.zip *
   - dir
   - cp -r output_file.zip /drone/src
   
