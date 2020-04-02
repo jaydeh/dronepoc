@@ -46,6 +46,7 @@ steps:
   - cp -r /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/ /drone/src/web
   - zip -r output_file.zip /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/
   - dir
+  - cp -r output_file.zip /
   
 #- name: deploy
   #image: cschlosser/drone-ftps
