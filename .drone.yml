@@ -64,7 +64,7 @@ steps:
   - echo $tenant
   - az login --service-principal -u $id -p $pass --tenant $tenant
  # - az login --service-principal -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID -u $AZURE_CLIENT_ID
- # - az webapp deployment source config-zip --src /drone/src/web/output_file.zip -n testingapp-drone -g data-factory-poc-int
+  - az webapp deployment source config-zip --src /drone/src/web/output_file.zip -n testingapp-drone -g data-factory-poc-int
    # environment:
 #      AZURE_CLIENT_ID:
  #       from_secret: AZURE_CLIENT_ID
