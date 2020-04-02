@@ -48,7 +48,7 @@ steps:
     FTP_USERNAME: testingapp-drone\$testingapp-drone
     FTP_PASSWORD: ZAJPdy5by2mjK8j6pXjAoZ9vKPLBZ0i2QLu3BnGdFPiSkBawQP6uCmAMr3Zx
     PLUGIN_HOSTNAME: ftps://waws-prod-dm1-057.ftp.azurewebsites.windows.net/site/wwwroot
-     PLUGIN_SRC_DIR: /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/
+    PLUGIN_SRC_DIR: /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/
     PLUGIN_SECURE: true
 
 trigger:
