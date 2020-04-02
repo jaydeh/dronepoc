@@ -34,20 +34,14 @@ steps:
   
 - name: publish
   image: mcr.microsoft.com/dotnet/core/sdk:3.0
-  volumes:
-  - name: webdir
-    path: /root/.webdir/web
   commands:
   - apt-get update -y
   - apt-get upgrade -y
   - apt-get install zip unzip -y
   - dotnet publish --configuration Release Drone-POC/WebApplication2/WebApplication2.csproj
-  - cd /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/
   - cp -r /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/ /drone/src/web
   - cd /drone/src/web
-  - dir
   - zip -r output_file.zip *
-  - dir
   - cp -r output_file.zip /drone/src
   
 - name: deploy
@@ -60,67 +54,9 @@ steps:
    tenant:
     from_secret: client_tenant
   commands:
-  - ls
-  - echo $id
-  - echo $pass
-  - echo $tenant
   - az login --service-principal -u $id -p $pass --tenant $tenant
- # - az login --service-principal -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID -u $AZURE_CLIENT_ID
   - az webapp deployment source config-zip --src /drone/src/output_file.zip -n testingapp-drone -g data-factory-poc-int
-   # environment:
-#      AZURE_CLIENT_ID:
- #       from_secret: AZURE_CLIENT_ID
-  #    AZURE_CLIENT_SECRET:
-   #     from_secret: AZURE_CLIENT_SECRET
-    #  AZURE_TENANT_ID:
-    #    from_secret: AZURE_TENANT_ID
-   
-#- name: deploy
-  #image: cschlosser/drone-ftps
-  #environment:
-    #FTP_USERNAME: testingapp-drone\$testingapp-drone
-    #FTP_PASSWORD: ZAJPdy5by2mjK8j6pXjAoZ9vKPLBZ0i2QLu3BnGdFPiSkBawQP6uCmAMr3Zx
-    #PLUGIN_HOSTNAME: ftps://waws-prod-dm1-057.ftp.azurewebsites.windows.net/site/wwwroot
-    #PLUGIN_SRC_DIR: /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/
-    #PLUGIN_SECURE: true
 
 trigger:
   branch:
   - develop
-  
-volumes:
-- name: webdir
-  temp: {}
-#---
-#kind: pipeline
-#type: docker
-#name: deploy
-
-#steps:
-#- name: clean
-#  image: mcr.microsoft.com/dotnet/core/sdk:3.0
-#  volumes:
-#  - name: webdir
-#    path: /root/.webdir/web
-#  commands:
-#  - cd  /drone/src/web
-#  - ls
-#  - dir
-
-#depends_on:
-#- web#
-
-#volumes:
-#- name: webdir
-#  temp: {}
-
-#pipeline:
-#  deploy:
-#    image: cschlosser/drone-ftps
-#    hostname: ftps://waws-prod-dm1-057.ftp.azurewebsites.windows.net/site/wwwroot:21
-#    secrets: [ ftp_username, ftp_password ]
-#    secure: true
-#+   src_dir: /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/
-#
-#depends_on:
-#- web build
