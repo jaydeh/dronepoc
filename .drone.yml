@@ -48,8 +48,10 @@ steps:
   - dir
   - cp -r output_file.zip /
   
- - name: deploy
-    image: mcr.microsoft.com/azure-cli
+- name: deploy
+  image: mcr.microsoft.com/azure-cli
+  commands:
+  - dir
    # environment:
 #      AZURE_CLIENT_ID:
  #       from_secret: AZURE_CLIENT_ID
@@ -57,8 +59,7 @@ steps:
    #     from_secret: AZURE_CLIENT_SECRET
     #  AZURE_TENANT_ID:
     #    from_secret: AZURE_TENANT_ID
-    commands:
-    - dir
+   
 #- name: deploy
   #image: cschlosser/drone-ftps
   #environment:
