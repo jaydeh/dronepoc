@@ -38,7 +38,7 @@ steps:
   - name: webdir
     path: /root/.webdir/web
   commands:
-  - install zip unzip
+  - apt install zip unzip
   - dotnet publish --configuration Release Drone-POC/WebApplication2/WebApplication2.csproj
   - cd /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/
   - cp -r /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/ /drone/src/web
