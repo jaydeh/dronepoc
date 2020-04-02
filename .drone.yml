@@ -51,16 +51,20 @@ steps:
 - name: deploy
   image: mcr.microsoft.com/azure-cli
   environment:
-  AZURE_CLIENT_ID:
-   from_secret: AZURE_CLIENT_ID
-  AZURE_CLIENT_SECRET:
-   from_secret: AZURE_CLIENT_SECRET
-  AZURE_TENANT_ID:
-   from_secret: AZURE_TENANT_ID
+   id:
+    from_secret: client_id
+   pass:
+    from_secret: client_pass
+   tenant:
+    from_secret: client_tenant
   commands:
   - ls
-  - az login --service-principal -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID -u $AZURE_CLIENT_ID
-  - az webapp deployment source config-zip --src /drone/src/web/output_file.zip -n testingapp-drone -g data-factory-poc-int
+  - echo $id
+  - echo $pass
+  - echo $tenant
+#  - az login --service-principal -u $id -p <password-or-cert> --tenant <tenant>
+ # - az login --service-principal -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID -u $AZURE_CLIENT_ID
+ # - az webapp deployment source config-zip --src /drone/src/web/output_file.zip -n testingapp-drone -g data-factory-poc-int
    # environment:
 #      AZURE_CLIENT_ID:
  #       from_secret: AZURE_CLIENT_ID
