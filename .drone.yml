@@ -22,14 +22,6 @@ type: docker
 name: web
 
 steps:
-- name: install needed linux programs
-  image: mcr.microsoft.com/dotnet/core/sdk:3.0
-  commands:
-  - apt-get update -y
-  - apt-get upgrade -y
-  - apt-get install zip unzip -y
-  - apt-get install jq -y
-  
 - name: clean
   image: mcr.microsoft.com/dotnet/core/sdk:3.0
   commands:
@@ -61,6 +53,9 @@ steps:
 - name: making zip files
   image: mcr.microsoft.com/dotnet/core/sdk:3.0
   commands:
+  - apt-get update -y
+  - apt-get upgrade -y
+  - apt-get install zip unzip -y
   - cp -r /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/ /drone/src/web
   - cd /drone/src/web
   - zip -r output_file.zip *
