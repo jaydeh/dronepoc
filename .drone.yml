@@ -43,8 +43,8 @@ steps:
   - apt-get update -y
   - apt-get upgrade -y
   - apt-get install jq -y
-  - cd /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/
-  - cat appsettings.json | jq 'to_entries | map(if .key == "Test1"
+  #- cd /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/
+  - cat /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/appsettings.json | jq 'to_entries | map(if .key == "Test1"
                                                 then  . + {"value":"changed"}
                                                 else .
                                                 end
