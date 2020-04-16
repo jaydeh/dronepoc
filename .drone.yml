@@ -53,6 +53,7 @@ steps:
 - name: making zip files
   image: mcr.microsoft.com/dotnet/core/sdk:3.0
   commands:
+  - cat /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/appsettings.json
   - apt-get update -y
   - apt-get upgrade -y
   - apt-get install zip unzip -y
