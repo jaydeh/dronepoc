@@ -57,11 +57,11 @@ steps:
   - apt-get upgrade -y
   - apt-get install zip unzip -y
   - apt-get install jq -y
-  - cat /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/appsettings.json | jq 'to_entries | map(if .key == "Test1"
+  - cat > /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/appsettings.json | jq 'to_entries | map(if .key == "Test1"
                                                 then  . + {"value":"changed"}
                                                 else .
                                                 end
-                                                  ) | from_entries'
+                                                  ) | from_entries' <<EOF
   - cat /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/appsettings.json
   - cp -r /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/ /drone/src/web
   - cd /drone/src/web
