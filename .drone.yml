@@ -39,6 +39,20 @@ steps:
   - apt-get upgrade -y
   - apt-get install zip unzip -y
   - dotnet publish --configuration Release Drone-POC/WebApplication2/WebApplication2.csproj
+ 
+- name: edit appsettings.json
+  image: mcr.microsoft.com/dotnet/core/sdk:3.0
+  commands:
+  - cd /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/
+  - cat appsettings.json | jq 'to_entries | map(if .key == "Test1"
+                                                then  . + {"value":"changed"}
+                                                else .
+                                                end
+                                                  ) | from_entries'
+  
+- name: making zip files
+  image: mcr.microsoft.com/dotnet/core/sdk:3.0
+  commands:
   - cp -r /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/ /drone/src/web
   - cd /drone/src/web
   - zip -r output_file.zip *
