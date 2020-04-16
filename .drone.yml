@@ -28,7 +28,7 @@ steps:
   - apt-get update -y
   - apt-get upgrade -y
   - apt-get install zip unzip -y
-  - apt-get install jq
+  - apt-get install jq -y
   
 - name: clean
   image: mcr.microsoft.com/dotnet/core/sdk:3.0
