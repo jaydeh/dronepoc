@@ -45,10 +45,10 @@ steps:
   #- apt-get install jq -y
   #- cd /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/
   #- cat /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/appsettings.json | jq 'to_entries | map(if .key == "Test1"
-                                                then  . + {"value":"changed"}
-                                                else .
-                                                end
-                                                  ) | from_entries'
+                                       #         then  . + {"value":"changed"}
+                                       #         else .
+                                       #         end
+                                       #           ) | from_entries'
   
 - name: making zip files
   image: mcr.microsoft.com/dotnet/core/sdk:3.0
