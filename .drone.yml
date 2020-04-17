@@ -53,12 +53,15 @@ steps:
                                        #           ) | from_entries'
 - name: test
   image: mcr.microsoft.com/dotnet/core/sdk:3.0
+  environment:
+    var1:
+      from_secret: var1
   commands:
   - apt-get update -y
   - apt-get upgrade -y
   - apt-get install zip unzip -y
   - apt-get install jq -y
-  - jq '.added = "new key"' /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/appsettings.json
+  - jq '.added = "$var1"' /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/appsettings.json
   
 - name: making zip files
   image: mcr.microsoft.com/dotnet/core/sdk:3.0
