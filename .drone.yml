@@ -1,9 +1,9 @@
 #kind: pipeline
 #type: docker
 #name: default
-
+#
 #steps:
-#- name: clean
+#- name: test
 #  image: mcr.microsoft.com/dotnet/core/sdk:3.0
 #  commands:
 #  - dotnet clean Drone-POC/Core/Core.csproj
@@ -25,7 +25,9 @@ steps:
 - name: clean
   image: mcr.microsoft.com/dotnet/core/sdk:3.0
   commands:
-  - dotnet clean Drone-POC/WebApplication2/WebApplication2.csproj
+  - apt-get update -y
+  - apt-get upgrade -y
+  - apt-get install jq -y
 
 - name: build
   image: mcr.microsoft.com/dotnet/core/sdk:3.0
@@ -49,6 +51,14 @@ steps:
                                        #         else .
                                        #         end
                                        #           ) | from_entries'
+- name: test
+  image: mcr.microsoft.com/dotnet/core/sdk:3.0
+  commands:
+  - apt-get update -y
+  - apt-get upgrade -y
+  - apt-get install zip unzip -y
+  - apt-get install jq -y
+  - jq '.added = "new key"' /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/appsettings.json
   
 - name: making zip files
   image: mcr.microsoft.com/dotnet/core/sdk:3.0
@@ -57,11 +67,11 @@ steps:
   - apt-get upgrade -y
   - apt-get install zip unzip -y
   - apt-get install jq -y
-  - cat >> /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/appsettings.json | jq 'to_entries | map(if .key == "Test1"
-                                                then  . + {"value":"changed"}
-                                                else .
-                                                end
-                                                  ) | from_entries' 
+  #- cat >> /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/appsettings.json | jq 'to_entries | map(if .key == "Test1"
+                              #                  then  . + {"value":"changed"}
+                              #                 else .
+                              #                 end
+                              #                   ) | from_entries' 
   #- cat /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/appsettings.json
   - cp -r /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/ /drone/src/web
   - cd /drone/src/web
