@@ -92,4 +92,4 @@ trigger:
     - develop
   event:
     include:
-    - merge
+    - pull_request: merged
