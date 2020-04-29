@@ -91,5 +91,4 @@ trigger:
     incude:
     - develop
   event:
-    include:
-    - pull_request: merged
+    pull_request: merged
