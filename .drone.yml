@@ -63,8 +63,8 @@ steps:
   - apt-get install jq -y
   - touch temp.json
   - cp /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/appsettings.json temp.json
-  - rm temp.json
   - jq --arg var1 $var1 '.Test1.Change1 = $var1' temp.json /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/appsettings.json
+  - rm temp.json
   
 - name: making zip files
   image: mcr.microsoft.com/dotnet/core/sdk:3.0
