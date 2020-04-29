@@ -20,7 +20,7 @@ steps:
   commands:
   - dotnet publish --configuration Release Drone-POC/WebApplication2/WebApplication2.csproj
  
-#- name: edit appsettings.json
+##- name: edit appsettings.json
  # image: mcr.microsoft.com/dotnet/core/sdk:3.0
   #commands:
   #- apt-get update -y
