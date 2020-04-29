@@ -80,6 +80,8 @@ steps:
 
 trigger:
   branch:
-  - develop
+    incude:
+    - develop
   event:
-  - pull_request
+    include:
+    - pull_request
