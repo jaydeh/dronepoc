@@ -1,5 +1,24 @@
 kind: pipeline
 type: docker
+name: pull request build
+
+steps:
+- name: build
+  image: mcr.microsoft.com/dotnet/core/sdk:3.0
+  commands:
+  - dotnet build Drone-POC/WebApplication2/WebApplication2.csproj
+  
+trigger:
+  branch:
+    incude:
+    - develop
+  event:
+    include:
+    - pull_request
+
+---
+kind: pipeline
+type: docker
 name: web
 
 steps:
@@ -20,18 +39,6 @@ steps:
   commands:
   - dotnet publish --configuration Release Drone-POC/WebApplication2/WebApplication2.csproj
  
-##- name: edit appsettings.json
- # image: mcr.microsoft.com/dotnet/core/sdk:3.0
-  #commands:
-  #- apt-get update -y
-  #- apt-get upgrade -y
-  #- apt-get install jq -y
-  #- cd /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/
-  #- cat /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/appsettings.json | jq 'to_entries | map(if .key == "Test1"
-                                       #         then  . + {"value":"changed"}
-                                       #         else .
-                                       # #        end
-                                       #           ) | from_entries'
 - name: test
   image: mcr.microsoft.com/dotnet/core/sdk:3.0
   environment:
@@ -84,4 +91,4 @@ trigger:
     - develop
   event:
     include:
-    - pull_request
+    - push
