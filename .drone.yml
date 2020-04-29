@@ -49,7 +49,7 @@ steps:
   #- cat /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/appsettings.json | jq 'to_entries | map(if .key == "Test1"
                                        #         then  . + {"value":"changed"}
                                        #         else .
-                                       #         end
+                                       # #        end
                                        #           ) | from_entries'
 - name: test
   image: mcr.microsoft.com/dotnet/core/sdk:3.0
