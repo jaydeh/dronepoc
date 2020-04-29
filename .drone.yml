@@ -88,4 +88,4 @@ trigger:
   branch:
     - develop
   event:
-    pull_request: merged
+    - push
