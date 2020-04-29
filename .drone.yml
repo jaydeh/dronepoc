@@ -61,7 +61,7 @@ steps:
   - apt-get upgrade -y
   - apt-get install zip unzip -y
   - apt-get install jq -y
-  - jq --arg var1 $var1 '.added.qwe = $var1' /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/appsettings.json
+  - jq --arg var1 $var1 '.Test1.Change1 = $var1' /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/appsettings.json
   
 - name: making zip files
   image: mcr.microsoft.com/dotnet/core/sdk:3.0
