@@ -10,10 +10,8 @@ steps:
   
 trigger:
   branch:
-    incude:
     - develop
   event:
-    include:
     - pull_request
 
 ---
@@ -88,7 +86,6 @@ steps:
 
 trigger:
   branch:
-    incude:
     - develop
   event:
     pull_request: merged
