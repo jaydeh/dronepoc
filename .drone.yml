@@ -6,6 +6,9 @@ name: test
 steps:
 - name: build
   image: mcr.microsoft.com/dotnet/core/sdk:3.0
+  environment:
+    qwe:
+      from_secret: qwe
   commands:
   - apt-get update -y
   - apt-get upgrade -y
@@ -14,7 +17,7 @@ steps:
   - cp /drone/src/Drone-POC/WebApplication2/appsettings.json temp.json
   - cat temp.json
  # - jq --arg qwe $qwe '.Test1 = $qwe' /drone/src/Drone-POC/WebApplication2/appsettings.json
-  - jq '.Test1.Change1' temp.json
+  - jq --arg qwe $qwe '.Test1.Change1 = $qwe' temp.json
 trigger:
   branch:
     - develop
