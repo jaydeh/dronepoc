@@ -1,7 +1,7 @@
 
 kind: pipeline
 type: docker
-name: pull request build
+name: test
 
 steps:
 - name: build
@@ -19,95 +19,95 @@ trigger:
     - develop
   event:
     - push
----
-kind: pipeline
-type: docker
-name: pull request build
+# ---
+# kind: pipeline
+# type: docker
+# name: pull request build
 
-steps:
-- name: build
-  image: mcr.microsoft.com/dotnet/core/sdk:3.0
-  commands:
-  - dotnet build Drone-POC/WebApplication2/WebApplication2.csproj
+# steps:
+# - name: build
+#   image: mcr.microsoft.com/dotnet/core/sdk:3.0
+#   commands:
+#   - dotnet build Drone-POC/WebApplication2/WebApplication2.csproj
   
-trigger:
-  branch:
-    - develop
-  event:
-    - pull_request
+# trigger:
+#   branch:
+#     - develop
+#   event:
+#     - pull_request
 
----
-##
-kind: pipeline
-type: docker
-name: web
+# ---
+# ##
+# kind: pipeline
+# type: docker
+# name: web
 
-steps:
-- name: clean
-  image: mcr.microsoft.com/dotnet/core/sdk:3.0
-  commands:
-  - apt-get update -y
-  - apt-get upgrade -y
-  - apt-get install jq -y
+# steps:
+# - name: clean
+#   image: mcr.microsoft.com/dotnet/core/sdk:3.0
+#   commands:
+#   - apt-get update -y
+#   - apt-get upgrade -y
+#   - apt-get install jq -y
 
-- name: build
-  image: mcr.microsoft.com/dotnet/core/sdk:3.0
-  commands:
-  - dotnet build Drone-POC/WebApplication2/WebApplication2.csproj
+# - name: build
+#   image: mcr.microsoft.com/dotnet/core/sdk:3.0
+#   commands:
+#   - dotnet build Drone-POC/WebApplication2/WebApplication2.csproj
   
-- name: publish
-  image: mcr.microsoft.com/dotnet/core/sdk:3.0
-  commands:
-  - dotnet publish --configuration Release Drone-POC/WebApplication2/WebApplication2.csproj
+# - name: publish
+#   image: mcr.microsoft.com/dotnet/core/sdk:3.0
+#   commands:
+#   - dotnet publish --configuration Release Drone-POC/WebApplication2/WebApplication2.csproj
  
-- name: test
-  image: mcr.microsoft.com/dotnet/core/sdk:3.0
-  environment:
-    var1:
-      from_secret: var1
-  commands:
-  - apt-get update -y
-  - apt-get upgrade -y
-  - apt-get install zip unzip -y
-  - apt-get install jq -y
-  - touch temp.json
-  - cp /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/appsettings.json temp.json
-  - jq --arg var1 $var1 '.Test1.Change1 = $var1' temp.json /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/appsettings.json
-  - rm temp.json
+# - name: test
+#   image: mcr.microsoft.com/dotnet/core/sdk:3.0
+#   environment:
+#     var1:
+#       from_secret: var1
+#   commands:
+#   - apt-get update -y
+#   - apt-get upgrade -y
+#   - apt-get install zip unzip -y
+#   - apt-get install jq -y
+#   - touch temp.json
+#   - cp /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/appsettings.json temp.json
+#   - jq --arg var1 $var1 '.Test1.Change1 = $var1' temp.json /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/appsettings.json
+#   - rm temp.json
   
-- name: making zip files
-  image: mcr.microsoft.com/dotnet/core/sdk:3.0
-  commands:
-  - apt-get update -y
-  - apt-get upgrade -y
-  - apt-get install zip unzip -y
-  - apt-get install jq -y
-  #- cat >> /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/appsettings.json | jq 'to_entries | map(if .key == "Test1"
-                              #                  then  . + {"value":"changed"}
-                              #                 else .
-                              #                 end
-                              #                   ) | from_entries' 
-  #- cat /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/appsettings.json
-  - cp -r /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/ /drone/src/web
-  - cd /drone/src/web
-  - zip -r output_file.zip *
-  - cp -r output_file.zip /drone/src
+# - name: making zip files
+#   image: mcr.microsoft.com/dotnet/core/sdk:3.0
+#   commands:
+#   - apt-get update -y
+#   - apt-get upgrade -y
+#   - apt-get install zip unzip -y
+#   - apt-get install jq -y
+#   #- cat >> /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/appsettings.json | jq 'to_entries | map(if .key == "Test1"
+#                               #                  then  . + {"value":"changed"}
+#                               #                 else .
+#                               #                 end
+#                               #                   ) | from_entries' 
+#   #- cat /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/appsettings.json
+#   - cp -r /drone/src/Drone-POC/WebApplication2/bin/Release/netcoreapp3.0/publish/ /drone/src/web
+#   - cd /drone/src/web
+#   - zip -r output_file.zip *
+#   - cp -r output_file.zip /drone/src
   
-- name: deploy
-  image: mcr.microsoft.com/azure-cli
-  environment:
-   id:
-    from_secret: client_id
-   pass:
-    from_secret: client_pass
-   tenant:
-    from_secret: client_tenant
-  commands:
-  - az login --service-principal -u $id -p $pass --tenant $tenant
-  - az webapp deployment source config-zip --src /drone/src/output_file.zip -n testingapp-drone -g data-factory-poc-int
+# - name: deploy
+#   image: mcr.microsoft.com/azure-cli
+#   environment:
+#    id:
+#     from_secret: client_id
+#    pass:
+#     from_secret: client_pass
+#    tenant:
+#     from_secret: client_tenant
+#   commands:
+#   - az login --service-principal -u $id -p $pass --tenant $tenant
+#   - az webapp deployment source config-zip --src /drone/src/output_file.zip -n testingapp-drone -g data-factory-poc-int
 
-trigger:
-  branch:
-    - develop
-  event:
-    - push
+# trigger:
+#   branch:
+#     - develop
+#   event:
+#     - push
