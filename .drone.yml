@@ -5,14 +5,15 @@ name: default
 steps:
 - name: clean
   image: mcr.microsoft.com/dotnet/core/sdk:3.0
+  environment:
+    qwe:
+      from secret: qwe
   commands:
-  - dotnet --version
-  - dotnet clean Drone-POC/Core/Core.csproj
-
-- name: build
-  image: mcr.microsoft.com/dotnet/core/sdk:3.0
-  commands:
-  - dotnet build Drone-POC/Core/Core.csproj
+  - apt-get update -y
+  - apt-get upgrade -y
+  - apt-get install jq -y
+  - touch temp.json
+  - jq --arg qwe$ qwe '.test = $qwe' temp.json
   
 trigger:
   branch:
