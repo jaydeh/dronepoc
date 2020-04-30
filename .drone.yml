@@ -13,7 +13,7 @@ steps:
   - apt-get upgrade -y
   - apt-get install jq -y
   - touch temp.json
-  - jq --arg qwe$ qwe '.test = $qwe' temp.json
+  - jq --arg qwe $qwe '.test = $qwe' temp.json
   
 trigger:
   branch:
