@@ -14,7 +14,7 @@ steps:
   - cp /drone/src/Drone-POC/WebApplication2/appsettings.json temp.json
   - cat temp.json
  # - jq --arg qwe $qwe '.Test1 = $qwe' /drone/src/Drone-POC/WebApplication2/appsettings.json
-  - jq --arg qwe $qwe '.Test1.Change1' temp.json
+  - jq '.Test1.Change1' temp.json
 trigger:
   branch:
     - develop
