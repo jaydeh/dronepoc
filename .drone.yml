@@ -12,6 +12,7 @@ steps:
   - apt-get install jq -y
   - touch temp.json
   - cp /drone/src/Drone-POC/WebApplication2/appsettings.json temp.json
+  - cat temp.json
   - jq --arg qwe $qwe '.test = $qwe' temp.json /drone/src/Drone-POC/WebApplication2/appsettings.json
   
 trigger:
