@@ -8,7 +8,7 @@ steps:
   image: mcr.microsoft.com/dotnet/core/sdk:3.0
   environment:
     test:
-      from_secret: test
+      from_secret: conn
   commands:
   - apt-get update -y
   - apt-get upgrade -y
